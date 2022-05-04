@@ -13,6 +13,14 @@ class EmployeeRepository
     @employees.find { |employee| employee.username == username }
   end
 
+  def all_riders
+    @employees.select { |employee| employee.rider? }
+  end
+
+  def find(id)
+    @employees.find { |employee| employee.id == id}
+  end
+
   def load_csv
     CSV.foreach(@csv_file_path, headers: :first_row, header_converters: :symbol) do |row|
       row[:id] = row[:id].to_i
